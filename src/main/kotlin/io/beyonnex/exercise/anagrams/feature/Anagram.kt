@@ -7,10 +7,10 @@ class Anagram {
         val frequencyMap = HashMap<Char, Int>(26)
 
         text1.lowercase()
-            .forEachIndexed { _, c -> putValidCharInMap(c, frequencyMap, 1) }
+            .forEach { c -> putValidCharInMap(c, frequencyMap, 1) }
 
         text2.lowercase()
-            .forEachIndexed { _, c -> putValidCharInMap(c, frequencyMap, -1) }
+            .forEach { c -> putValidCharInMap(c, frequencyMap, -1) }
 
         if (frequencyMap.keys.isEmpty()) {
             return false
