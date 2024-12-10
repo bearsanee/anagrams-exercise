@@ -6,21 +6,21 @@ class InMemoryAnagramRepository: AnagramRepository {
     private val map = mutableMapOf<String, MutableSet<String>>()
 
     override fun saveAnagrams(text1: String, text2: String) {
-        if (map.containsKey(text1)) {
-            map[text1]?.add(text2)
-        } else {
-            map[text1] = mutableSetOf(text2)
-        }
+        addToMap(text1, text2)
+        addToMap(text2, text1)
+    }
 
-        if (map.containsKey(text2)) {
-            map[text2]?.add(text1)
+    private fun addToMap(key: String, value: String) {
+        if (map.containsKey(key)) {
+            map[key]?.add(value)
         } else {
-            map[text2] = mutableSetOf(text1)
+            map[key] = mutableSetOf(value)
         }
     }
 
     override fun findAnagrams(text: String): List<String> {
         val result = mutableSetOf<String>()
+
         val textToSearch: Queue<String> = LinkedList()
         val alreadySearched = HashSet<String>()
 
